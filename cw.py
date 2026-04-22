@@ -119,7 +119,7 @@ for line, stations in data.items():
         manual_key = (u, v) if (u, v) in manual_distance_overrides else (v, u)
         dist = manual_distance_overrides.get(manual_key, round(default_dist, 1))
 
-        # Ghi rõ source line, màu và khoảng cách cuối cùng.
+        # Specify source line, color and final distance.
         G.add_edge(u, v, color=line_colors[line], line=line, distance=round(dist, 1))
 
 # --- 5. Interactive Terminal UI ---
@@ -262,23 +262,23 @@ nx.draw_networkx_labels(
 
 # Legend Configuration
 from matplotlib.lines import Line2D
-# 1. Tạo các đường cho MRT Lines
+# 1. Create lines for MRT Lines
 line_elements = [Line2D([0], [0], color=c, lw=4, label=k) for k, c in line_colors.items()]
 
-# 2. Tạo ký hiệu cho Trạm Chuyển Tuyến (Interchange)
+# 2. Create symbol for Interchange Station
 interchange_legend = Line2D([0], [0], marker='o', color='none', label='Interchange Station',
                             markerfacecolor='white', markeredgecolor='black', 
                             markersize=10, markeredgewidth=2.5)
 
-# 3. Tạo ký hiệu cho Trạm Thường (Regular Station)
+# 3. Create symbol for Regular Station
 regular_legend = Line2D([0], [0], marker='o', color='none', label='Regular Station',
                         markerfacecolor='#888888', markeredgecolor='black', 
                         markersize=8, markeredgewidth=1.5)
 
-# Kết hợp tất cả lại
+# Combine all together
 legend_elements = line_elements + [interchange_legend, regular_legend]
 
-# Vẽ Legend
+# Draw Legend
 ax.legend(handles=legend_elements, loc='upper left', title="MRT Network Legend", 
           frameon=True, fontsize=10, title_fontsize=12)
 
